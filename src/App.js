@@ -1,9 +1,12 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
 import Header from './Header';
-import Footer from './Footer';
 import MainContent from './MainContent';
+import Blog from './Blog';
+import Footer from './Footer';
 import Nav from './Nav';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,53 +14,50 @@ import {
   Link
 } from "react-router-dom";
 
-const headerContent = 'Best website ever!'
+
+const websiteCopy = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla perferendis similique, facilis culpa neque optio atque mollitia ea molestiae tenetur, repellendus exercitationem delectus voluptatum a numquam repellat. Sapiente, est blanditiis.`;
+
+const websiteTitle = `Amazing Web Developerererer!`;
 
 const linkNames = [
   {
     text: 'Home',
     path: '/'
-}, 
-{
-  text: 'Blog',
-  path: '/blog'
-}
-];
-
-const footerLinks = [
+  },
   {
-    href: "mailto:me@me.com",
-    text: "Email me!"
+    text: 'Blog',
+    path: '/blog'
   }
-]
-
-const mainContent = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus error cupiditate fugiat, doloremque consequatur, soluta maiores in tempora quo aliquid veniam blanditiis aliquam, sit sapiente nobis nisi accusamus eveniet maxime!'
+];
 
 function App() {
   return (
     <Router>
-     <Nav
-      links={linkNames}
+      <Header title={websiteTitle} />
+      <Nav 
+        links={linkNames}
       />
 
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/blog">
+      <Switch>    
+        <Route path="/blog/:blogId">
           <Blog />
         </Route>
+        <Route path="/">
+          <Home />
+        </Route>
       </Switch>
+
+      <Footer />
     </Router>
   );
 }
 
 function Home() {
-  return <h1>You are Home</h1>
-}
-function Blog() {
-  return <h1>You are on the blog!</h1>
+  return <h1>You are Home</h1>;
 }
 
+function BlogList() {
+  return <p>This is the blog list</p>
+}
 
 export default App;

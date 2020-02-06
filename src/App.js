@@ -4,14 +4,24 @@ import Header from './Header';
 import Footer from './Footer';
 import MainContent from './MainContent';
 import Nav from './Nav';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const headerContent = 'Best website ever!'
 
 const linkNames = [
-  'Home',
-  'Portfolio',
-  'Cat Pictures',
-  'Contact'
+  {
+    text: 'Home',
+    path: '/'
+}, 
+{
+  text: 'Blog',
+  path: '/blog'
+}
 ];
 
 const footerLinks = [
@@ -25,21 +35,29 @@ const mainContent = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ne
 
 function App() {
   return (
-    <div className="container-fluid"> 
-      {/* select div to style entire page like body */}
-    <Header
-      title={headerContent}
-    />
-    <Nav
+    <Router>
+     <Nav
       links={linkNames}
-     />
-    <MainContent
-      content={mainContent}
-    />
-    <Footer />
-    
-    </div>
+      />
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/blog">
+          <Blog />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
+
+function Home() {
+  return <h1>You are Home</h1>
+}
+function Blog() {
+  return <h1>You are on the blog!</h1>
+}
+
 
 export default App;
